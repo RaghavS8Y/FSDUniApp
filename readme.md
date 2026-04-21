@@ -172,20 +172,6 @@ CLIUniApp/
 
 ---
 
-## Git Workflow in VSCode
-
-### First time — Jasmine does this, then shares the repo link with everyone
-1. Open VSCode and open the project folder
-2. Press `Ctrl+Shift+P` → type `Git: Initialize Repository` → select the folder
-3. Go to GitHub, create a new **private** repository called `CLIUniApp`
-4. Open the VSCode terminal (`Ctrl+`` `) and run these three commands:
-   ```
-   git remote add origin <your-github-repo-url>
-   git branch -M main
-   git push -u origin main
-   ```
-5. On GitHub → Settings → Collaborators → invite Christina, Lex, and Raghav
-
 
 
 ### Before you start working each day — always do this first
