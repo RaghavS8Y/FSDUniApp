@@ -174,14 +174,38 @@ CLIUniApp/
 
 ## Git Workflow in VSCode
 
+### First time — Jasmine does this, then shares the repo link with everyone
+1. Open VSCode and open the project folder
+2. Press `Ctrl+Shift+P` → type `Git: Initialize Repository` → select the folder
+3. Go to GitHub, create a new **private** repository called `CLIUniApp`
+4. Open the VSCode terminal (`Ctrl+`` `) and run these three commands:
+   ```
+   git remote add origin <your-github-repo-url>
+   git branch -M main
+   git push -u origin main
+   ```
+5. On GitHub → Settings → Collaborators → invite Christina, Lex, and Raghav
 
+### Cloning — Christina, Lex, and Raghav do this once
+1. Open VSCode
+2. Press `Ctrl+Shift+P` → `Git: Clone`
+3. Paste the repo URL Jasmine shared → pick a local folder to save it
 
-### Before you start working — always do this first
+### Before you start working each day — always do this first
 1. Click the **Source Control** icon in the left sidebar (looks like a fork/branch)
-2. Click the Fetch from all remotes button
+2. Click the `...` menu → `Pull`
 3. Only start coding after you have pulled
 
+### Everyone works on their own branch — never on main
+- Jasmine → `jasmine/parts-ab`
+- Christina → `christina/part-c`
+- Lex → `lex/part-d`
+- Raghav → `raghav/part-e`
 
+To create your branch in VSCode:
+1. Click the branch name in the bottom-left corner (it says `main`)
+2. Click `+ Create new branch`
+3. Type your branch name from the list above and press Enter
 
 ### Saving and uploading your work
 1. Save your file with `Ctrl+S`
@@ -191,9 +215,15 @@ CLIUniApp/
 5. Click the `✓ Commit` button
 6. Click `Sync Changes` to push to GitHub
 
-
+### When your part is done — tell Raghav to merge it
+1. Go to GitHub in your browser
+2. Click `Pull Requests` → `New Pull Request`
+3. Set base to `main`, compare to your branch
+4. Click `Create Pull Request` and message Raghav
+5. Raghav reviews it and merges
 
 ### Rules — everyone follow these
+- Never push directly to `main`
 - Always pull before you start working
 - Commit little and often — do not do one giant commit the night before
 - Do not edit files that belong to someone else — message them if you need a change
@@ -202,7 +232,7 @@ CLIUniApp/
 
 ## Shared Agreements — Do Not Change These Without Telling Everyone
 
-- `students.data` is serialised using Python's `pickle` module
+- `students.data` is stored as JSON using Python's built-in `json` module
 - `Database.read_all()` always returns a list of `Student` objects (empty list if the file is empty, never crashes)
 - `Database.write_all(students)` always takes a full list and overwrites the entire file
 - `Student.subjects` is always a list of `Subject` objects — never a list of IDs or strings
