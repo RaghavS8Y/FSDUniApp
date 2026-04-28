@@ -43,7 +43,7 @@ CLIUniApp/
 │   ├── subject_window.py
 │   └── exception_window.py
 │
-├── students.data
+├── students.json
 ├── main.py
 ├── gui_main.py
 └── README.md
@@ -93,7 +93,7 @@ CLIUniApp/
 **Files to own:**
 - `models/student.py` — Student class and all its fields
 - `models/subject.py` — Subject class and all its fields
-- `models/database.py` — read, write, and clear operations on `students.data`
+- `models/database.py` — read, write, and clear operations on `students.json`
 - `controllers/student_controller.py` — university menu, student menu, register, login, regex validation
 
 **Methods to implement in `StudentController`:**
@@ -127,7 +127,7 @@ CLIUniApp/
 
 **How to test your part alone:**
 - Create a temporary `test_christina.py` at the project root
-- Manually create a `Student` object with fake data, write them to `students.data` using `Database`, then pass that student into `SubjectController` and call `enrolment_menu()`
+- Manually create a `Student` object with fake data, write them to `students.json` using `Database`, then pass that student into `SubjectController` and call `enrolment_menu()`
 - You do not need Jasmine's login flow to be finished
 
 ---
@@ -149,7 +149,7 @@ CLIUniApp/
 
 **How to test your part alone:**
 - Create a temporary `test_lex.py` at the project root
-- Manually create a few `Student` objects, attach some `Subject` objects to them, write them to `students.data` using `Database`, then call `AdminController().admin_menu()`
+- Manually create a few `Student` objects, attach some `Subject` objects to them, write them to `students.json` using `Database`, then call `AdminController().admin_menu()`
 - You do not need Jasmine's menus or Christina's enrolment to be finished
 
 ---
@@ -157,7 +157,7 @@ CLIUniApp/
 ### Raghav — Part E + Integration
 
 **Files to own:**
-- `gui/login_window.py` — email + password fields, login button, reads registered students from `students.data`
+- `gui/login_window.py` — email + password fields, login button, reads registered students from `students.json`
 - `gui/enrolment_window.py` — enrol button, shows enrolment list, enforces max 4 subjects
 - `gui/subject_window.py` — lists enrolled subjects with mark and grade
 - `gui/exception_window.py` — handles empty fields, bad format, and attempts to enrol in more than 4 subjects
@@ -168,7 +168,7 @@ CLIUniApp/
 - Wire `main.py` so a successful student login passes the Student object to `SubjectController`
 - Wire `main.py` so the university menu calls both `StudentController` and `AdminController` correctly
 - Test the full CLI flow end-to-end before the showcase
-- Confirm that `students.data` written by the CLI is readable by the GUI and vice versa
+- Confirm that `students.json` written by the CLI is readable by the GUI and vice versa
 
 ---
 
@@ -211,8 +211,8 @@ CLIUniApp/
 ## Submission Checklist
 
 - [ ] CLI runs completely from start to finish without errors
-- [ ] `students.data` is created automatically if it does not exist
-- [ ] GUI reads from the same `students.data` as the CLI
+- [ ] `students.json` is created automatically if it does not exist
+- [ ] GUI reads from the same `students.json` as the CLI
 - [ ] All menus match the sample I/O wording and indentation from the assignment spec
 - [ ] Every folder has an `__init__.py` file
 - [ ] `README.md` explains how to run both the CLI and GUI
