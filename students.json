@@ -1,0 +1,30 @@
+[
+  {
+    "id": "123456",
+    "name": "Alan Jones",
+    "email": "alan.jones@university.com",
+    "password": "Helloworld123",
+    "subjects": [
+      {
+        "id": "138",
+        "mark": 44,
+        "grade": "Z"
+      },
+      {
+        "id": "044",
+        "mark": 91,
+        "grade": "HD"
+      },
+      {
+        "id": "375",
+        "mark": 78,
+        "grade": "D"
+      },
+      {
+        "id": "349",
+        "mark": 68,
+        "grade": "C"
+      }
+    ]
+  }
+]
