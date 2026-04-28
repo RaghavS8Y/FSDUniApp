@@ -2,7 +2,7 @@ import json
 import os
 from models.student import Student
 
-DATABASE_FILE = "student.data"
+DATABASE_FILE = "student.json"
 
 class Database:
 
