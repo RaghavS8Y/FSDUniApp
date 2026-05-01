@@ -3,7 +3,7 @@ from models.student import Student
 from models.database import Database
 
 EMAIL_PATTERN = r"^[a-zA-Z]+\.[a-zA-Z]+@university\.com$"
-PASSWORD_PATTERN = r"^[A-Z][a-zA-Z]{4,}\d{3,}$"
+PASSWORD_PATTERN = r"^[A-Z][a-zA-Z]{5,}\d{3,}$"
 
 class StudentController:
 
@@ -25,7 +25,7 @@ class StudentController:
     def university_menu(self):
 
         while True:
-            choice = input("University System: (A)dmin, (S)tudent, or X : ").srtip()
+            choice = input("University System: (A)dmin, (S)tudent, or X : ").strip()
 
             if choice == "A":
                 from controllers.admin_controller import AdminController
@@ -95,7 +95,7 @@ class StudentController:
 
         while True:
             email = input("        Email: ").strip()
-            password = input("         Password: ").strip()
+            password = input("        Password: ").strip()
 
             if not self.validate_credentials(email, password):
                 print("        Incorrect email or password format")
