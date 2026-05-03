@@ -1,8 +1,31 @@
 [
   {
-    "name": "John Smith",
-    "email": "john.smith@university.com",
-    "password": "Helloworld1234",
+    "name": "Raghav Sethi",
+    "email": "raghav.sethi@university.com",
+    "password": "Gamer1234",
+    "student_id": "061171",
+    "subjects": [
+      {
+        "subject_id": "095",
+        "mark": 46,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "286",
+        "mark": 90,
+        "grade": "HD"
+      },
+      {
+        "subject_id": "067",
+        "mark": 26,
+        "grade": "Z"
+      }
+    ]
+  },
+  {
+    "name": "Raghav Sethi",
+    "email": "raghav.sethi@university.com",
+    "password": "Helloworld123",
     "student_id": "061171",
     "subjects": []
   },
@@ -12,5 +35,47 @@
     "password": "Helloworld123",
     "student_id": "937080",
     "subjects": []
+  },
+  {
+    "name": "Alan Jones",
+    "email": "alan.jones@university.com",
+    "password": "Helloworld123",
+    "student_id": "593774",
+    "subjects": []
+  },
+  {
+    "name": "Alan Jones",
+    "email": "alan.jones@university.com",
+    "password": "Helloworld123",
+    "student_id": "554453",
+    "subjects": []
+  },
+  {
+    "name": "Alan Jones",
+    "email": "alan.jones@university.com",
+    "password": "Helloworld123",
+    "student_id": "406012",
+    "subjects": [
+      {
+        "subject_id": "748",
+        "mark": 32,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "078",
+        "mark": 44,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "886",
+        "mark": 88,
+        "grade": "HD"
+      },
+      {
+        "subject_id": "843",
+        "mark": 55,
+        "grade": "P"
+      }
+    ]
   }
 ]
