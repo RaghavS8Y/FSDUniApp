@@ -1,0 +1,20 @@
+[
+  {
+    "name": "John Smith",
+    "email": "john.smith@university.com",
+    "password": "Helloworld123",
+    "student_id": "673358",
+    "subjects": [
+      {
+        "subject_id": "101",
+        "mark": 68,
+        "grade": "C"
+      },
+      {
+        "subject_id": "102",
+        "mark": 69,
+        "grade": "C"
+      }
+    ]
+  }
+]

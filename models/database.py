@@ -2,7 +2,7 @@ import json
 import os
 from models.student import Student
 
-DATABASE_FILE = "student.json"
+DATABASE_FILE = "students.data"
 
 class Database:
 
@@ -11,15 +11,18 @@ class Database:
 
     def file_exists(self):
         if not os.path.exists(DATABASE_FILE):
-            with open (DATABASE_FILE, "w") as f:
-                json.dump([],f)
+            with open(DATABASE_FILE, "w") as f:
+                json.dump([], f)
 
     def read_all(self):
 
         self.file_exists()
 
-        with open (DATABASE_FILE, "r") as f:
-            data = json.load(f)
+        try:
+            with open(DATABASE_FILE, "r") as f:
+                data = json.load(f)
+        except json.JSONDecodeError:
+            data = []
                 
         students = []
         for s in data:
@@ -32,7 +35,7 @@ class Database:
 
         self.file_exists()
 
-        with open (DATABASE_FILE, "w") as f:
+        with open(DATABASE_FILE, "w") as f:
             
             students_list = []
             for s in students:
@@ -46,5 +49,5 @@ class Database:
         self.file_exists()
 
         with open(DATABASE_FILE, "w") as f:
-            json.dump([],f)
+            json.dump([], f)
 

@@ -35,7 +35,7 @@ class Student:
     # convert the student object to a dictionary    
     def to_dict(self):
 
-        subjects_list = [],
+        subjects_list = []
         for s in self.subjects:
             subjects_list.append(s.to_dict())
         
