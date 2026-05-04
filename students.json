@@ -1,80 +1,70 @@
 [
   {
-    "name": "Raghav Sethi",
-    "email": "raghav.sethi@university.com",
-    "password": "Gamer1234",
-    "student_id": "061171",
+    "name": "John Smith",
+    "email": "john.smith@university.com",
+    "password": "Hello123",
+    "student_id": "673358",
     "subjects": [
       {
-        "subject_id": "095",
-        "mark": 46,
-        "grade": "Z"
+        "subject_id": "541",
+        "mark": 68,
+        "grade": "C"
       },
       {
-        "subject_id": "286",
-        "mark": 90,
+        "subject_id": "283",
+        "mark": 85,
         "grade": "HD"
       },
       {
-        "subject_id": "067",
-        "mark": 26,
-        "grade": "Z"
+        "subject_id": "834",
+        "mark": 59,
+        "grade": "P"
+      }
+    ]
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane.doe@university.com",
+    "password": "World456",
+    "student_id": "762740",
+    "subjects": [
+      {
+        "subject_id": "192",
+        "mark": 55,
+        "grade": "P"
+      },
+      {
+        "subject_id": "047",
+        "mark": 78,
+        "grade": "D"
       }
     ]
   },
   {
     "name": "Raghav Sethi",
     "email": "raghav.sethi@university.com",
-    "password": "Helloworld123",
-    "student_id": "061171",
-    "subjects": []
-  },
-  {
-    "name": "Alen Jones",
-    "email": "alen.jones@university.com",
-    "password": "Helloworld123",
-    "student_id": "937080",
-    "subjects": []
-  },
-  {
-    "name": "Alan Jones",
-    "email": "alan.jones@university.com",
-    "password": "Helloworld123",
-    "student_id": "593774",
-    "subjects": []
-  },
-  {
-    "name": "Alan Jones",
-    "email": "alan.jones@university.com",
-    "password": "Helloworld123",
-    "student_id": "554453",
-    "subjects": []
-  },
-  {
-    "name": "Alan Jones",
-    "email": "alan.jones@university.com",
-    "password": "Helloworld123",
-    "student_id": "406012",
+    "password": "Testing1234",
+    "student_id": "298279",
     "subjects": [
       {
-        "subject_id": "748",
-        "mark": 32,
-        "grade": "Z"
-      },
-      {
-        "subject_id": "078",
-        "mark": 44,
-        "grade": "Z"
-      },
-      {
-        "subject_id": "886",
-        "mark": 88,
-        "grade": "HD"
-      },
-      {
-        "subject_id": "843",
+        "subject_id": "187",
         "mark": 55,
         "grade": "P"
+      },
+      {
+        "subject_id": "399",
+        "mark": 82,
+        "grade": "D"
+      },
+      {
+        "subject_id": "983",
+        "mark": 37,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "059",
+        "mark": 32,
+        "grade": "Z"
       }
     ]
   }
