@@ -134,7 +134,7 @@ class EnrolmentWindow(QMainWindow):
             from gui.exception_window import ExceptionWindow
             ExceptionWindow("Students are allowed to enrol in 4 subjects only.", self).exec()
             return
-        # Will be wired to SubjectController.enrol_subject() later
+        # Will be wired to SubjectController.enrol_subject() later --> TODO TODAY PLEASE???
 
     def _on_view(self):
         from gui.subject_window import SubjectWindow

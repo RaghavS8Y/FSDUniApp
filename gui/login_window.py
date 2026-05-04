@@ -20,7 +20,7 @@ class LoginWindow(QMainWindow):
         outer.setContentsMargins(0, 0, 0, 0)
         outer.setSpacing(0)
 
-        # Coloured header
+        # Coloured header -> DOESNT LOOK GOOD NEED TO CHANGE
         header = QFrame()
         header.setFixedHeight(150)
         header.setStyleSheet("QFrame { background-color: #4f46e5; }")

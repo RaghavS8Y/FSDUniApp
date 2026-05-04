@@ -29,7 +29,7 @@ class StudentController:
 
             if choice == "A":
                 from controllers.admin_controller import AdminController
-                AdminController.admin_menu()
+                AdminController().admin_menu()
 
             elif choice == "S":
                 self.student_menu()
