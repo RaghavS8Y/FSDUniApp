@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout,
+    QMainWindow, QWidget, QVBoxLayout, QFrame,
     QLabel, QLineEdit, QPushButton
 )
 from PyQt6.QtCore import Qt
@@ -10,44 +10,77 @@ class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("GUIUniApp")
-        self.setFixedSize(420, 320)
+        self.setFixedSize(440, 500)
         self._build_ui()
 
     def _build_ui(self):
         central = QWidget()
         self.setCentralWidget(central)
-        layout = QVBoxLayout(central)
-        layout.setSpacing(12)
-        layout.setContentsMargins(50, 40, 50, 40)
+        outer = QVBoxLayout(central)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setSpacing(0)
 
-        title = QLabel("Student Sign In")
-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # Coloured header
+        header = QFrame()
+        header.setFixedHeight(150)
+        header.setStyleSheet("QFrame { background-color: #4f46e5; }")
+        header_layout = QVBoxLayout(header)
+        header_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        header_layout.setSpacing(6)
+
+        app_label = QLabel("GUIUniApp")
+        app_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        app_label.setFont(QFont("Arial", 26, QFont.Weight.Bold))
+        app_label.setStyleSheet("color: white; background: transparent;")
+        header_layout.addWidget(app_label)
+
+        subtitle = QLabel("University Student Portal")
+        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        subtitle.setStyleSheet("color: #c7d2fe; font-size: 13px; background: transparent;")
+        header_layout.addWidget(subtitle)
+
+        outer.addWidget(header)
+
+        # White form area
+        form_widget = QWidget()
+        form_widget.setStyleSheet("QWidget { background-color: #ffffff; }")
+        form = QVBoxLayout(form_widget)
+        form.setContentsMargins(48, 36, 48, 36)
+        form.setSpacing(14)
+
+        title = QLabel("Sign In")
         title.setFont(QFont("Arial", 18, QFont.Weight.Bold))
-        layout.addWidget(title)
+        title.setStyleSheet("color: #0f172a; background: transparent;")
+        form.addWidget(title)
 
-        layout.addSpacing(10)
+        form.addSpacing(6)
 
         self.email_input = QLineEdit()
-        self.email_input.setPlaceholderText("Email")
-        self.email_input.setFixedHeight(36)
-        layout.addWidget(self.email_input)
+        self.email_input.setPlaceholderText("Email address")
+        self.email_input.setFixedHeight(46)
+        form.addWidget(self.email_input)
 
         self.password_input = QLineEdit()
         self.password_input.setPlaceholderText("Password")
         self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
-        self.password_input.setFixedHeight(36)
-        layout.addWidget(self.password_input)
+        self.password_input.setFixedHeight(46)
+        self.password_input.returnPressed.connect(self._on_login)
+        form.addWidget(self.password_input)
 
         self.error_label = QLabel("")
         self.error_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.error_label.setStyleSheet("color: red; font-size: 12px;")
-        layout.addWidget(self.error_label)
+        self.error_label.setWordWrap(True)
+        self.error_label.setFixedHeight(20)
+        self.error_label.setStyleSheet("color: #dc2626; font-size: 12px; background: transparent;")
+        form.addWidget(self.error_label)
 
-        login_btn = QPushButton("Login")
-        login_btn.setFixedHeight(38)
-        login_btn.setStyleSheet("font-size: 14px;")
+        login_btn = QPushButton("Sign In")
+        login_btn.setFixedHeight(46)
         login_btn.clicked.connect(self._on_login)
-        layout.addWidget(login_btn)
+        form.addWidget(login_btn)
+
+        form.addStretch()
+        outer.addWidget(form_widget, 1)
 
     def _on_login(self):
         email = self.email_input.text().strip()
