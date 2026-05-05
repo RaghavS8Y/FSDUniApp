@@ -7,10 +7,9 @@ from PyQt6.QtGui import QFont
 
 
 class EnrolmentWindow(QMainWindow):
-    def __init__(self, student_name="Student", subjects=None):
+    def __init__(self, student):
         super().__init__()
-        self.student_name = student_name
-        self.subjects = subjects or []
+        self.student = student
         self.setWindowTitle("GUIUniApp - Enrolment")
         self.setFixedSize(560, 560)
         self._build_ui()
@@ -69,7 +68,7 @@ class EnrolmentWindow(QMainWindow):
         content_layout.setContentsMargins(32, 28, 32, 28)
         content_layout.setSpacing(14)
 
-        welcome_label = QLabel(f"Welcome, {self.student_name}")
+        welcome_label = QLabel(f"Welcome, {self.student.name}")
         welcome_label.setFont(QFont("Arial", 18, QFont.Weight.Bold))
         welcome_label.setStyleSheet("color: #0f172a; background: transparent;")
         content_layout.addWidget(welcome_label)
@@ -115,30 +114,49 @@ class EnrolmentWindow(QMainWindow):
 
     def _refresh_list(self):
         self.subject_list.clear()
-        if not self.subjects:
+        if not self.student.subjects:
             item = QListWidgetItem("No subjects enrolled yet.")
             item.setForeground(Qt.GlobalColor.gray)
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsSelectable)
             self.subject_list.addItem(item)
         else:
-            for s in self.subjects:
+            for s in self.student.subjects:
                 self.subject_list.addItem(
                     f"  Subject {s.subject_id}    ·    Mark: {s.mark}    ·    Grade: {s.grade}"
                 )
         self.count_label.setText(
-            f"Enrolled in {len(self.subjects)} of 4 subjects"
+            f"Enrolled in {len(self.student.subjects)} of 4 subjects"
         )
 
     def _on_enrol(self):
-        if len(self.subjects) >= 4:
-            from gui.exception_window import ExceptionWindow
+        from gui.exception_window import ExceptionWindow
+        from models.subject import Subject
+        from models.database import Database
+
+        # check enrolment limit
+        if len(self.student.subjects) >= 4:
             ExceptionWindow("Students are allowed to enrol in 4 subjects only.", self).exec()
             return
-        # Will be wired to SubjectController.enrol_subject() later --> TODO TODAY PLEASE???
+
+        # create new subject and add to student
+        new_subject = Subject()
+        self.student.subjects.append(new_subject)
+
+        # save updated student back to database
+        db = Database()
+        all_students = db.read_all()
+
+        for i in range(len(all_students)):
+            if all_students[i].student_id == self.student.student_id:
+                all_students[i] = self.student
+
+        db.write_all(all_students)
+
+        self._refresh_list()
 
     def _on_view(self):
         from gui.subject_window import SubjectWindow
-        self.subject_window = SubjectWindow(self.subjects, parent=self)
+        self.subject_window = SubjectWindow(self.student.subjects, parent=self)
         self.subject_window.show()
 
     def _on_logout(self):

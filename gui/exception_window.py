@@ -6,7 +6,7 @@ from PyQt6.QtGui import QFont
 class ExceptionWindow(QDialog):
     def __init__(self, message, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Error")
+        self.setWindowTitle("ERROR")
         self.setFixedSize(380, 230)
         self.setStyleSheet("QDialog { background-color: #ffffff; }")
         self._build_ui(message)
@@ -29,10 +29,10 @@ class ExceptionWindow(QDialog):
         content_layout.setContentsMargins(36, 20, 36, 28)
         content_layout.setSpacing(10)
 
-        icon_label = QLabel("⚠")
+        icon_label = QLabel("ERROR")
         icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         icon_label.setStyleSheet("font-size: 34px; color: #dc2626; background: transparent;")
-        content_layout.addWidget(icon_label)
+
 
         title_label = QLabel("Something went wrong")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)

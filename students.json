@@ -37,6 +37,16 @@
         "subject_id": "047",
         "mark": 78,
         "grade": "D"
+      },
+      {
+        "subject_id": "784",
+        "mark": 44,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "150",
+        "mark": 72,
+        "grade": "C"
       }
     ]
   },

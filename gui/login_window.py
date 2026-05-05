@@ -20,7 +20,7 @@ class LoginWindow(QMainWindow):
         outer.setContentsMargins(0, 0, 0, 0)
         outer.setSpacing(0)
 
-        # Coloured header -> DOESNT LOOK GOOD NEED TO CHANGE
+        # Coloured header
         header = QFrame()
         header.setFixedHeight(150)
         header.setStyleSheet("QFrame { background-color: #4f46e5; }")
@@ -83,16 +83,40 @@ class LoginWindow(QMainWindow):
         outer.addWidget(form_widget, 1)
 
     def _on_login(self):
+        from gui.exception_window import ExceptionWindow
+        from controllers.student_controller import StudentController
+        from models.database import Database
+        from gui.enrolment_window import EnrolmentWindow
+
         email = self.email_input.text().strip()
         password = self.password_input.text().strip()
 
-        if not email or not password:
-            from gui.exception_window import ExceptionWindow
+        # check fields are not empty
+        if email == "" or password == "":
             ExceptionWindow("Email and password fields cannot be empty.", self).exec()
             return
 
-        # Placeholder until StudentController is wired in
-        from gui.enrolment_window import EnrolmentWindow
-        self.enrolment_window = EnrolmentWindow(student_name="Test Student")
+        # check email and password format
+        sc = StudentController()
+        if sc.validate_credentials(email, password) == False:
+            ExceptionWindow("Incorrect email or password format.", self).exec()
+            return
+
+        # search for student in database
+        db = Database()
+        all_students = db.read_all()
+        logged_in_student = None
+
+        for student in all_students:
+            if student.email == email and student.password == password:
+                logged_in_student = student
+
+        # check if student was found
+        if logged_in_student == None:
+            ExceptionWindow("Student does not exist.", self).exec()
+            return
+
+        # open enrolment window
+        self.enrolment_window = EnrolmentWindow(logged_in_student)
         self.enrolment_window.show()
         self.close()
