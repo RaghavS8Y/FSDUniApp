@@ -211,10 +211,8 @@ CLIUniApp/
 ## Submission Checklist
 
 - [ ] CLI runs completely from start to finish without errors
-- [ ] `students.json` is created automatically if it does not exist
-- [ ] GUI reads from the same `students.json` as the CLI
+- [DONE] GUI reads from the same `students.json` as the CLI
 - [ ] All menus match the sample I/O wording and indentation from the assignment spec
-- [ ] Every folder has an `__init__.py` file
 - [ ] `README.md` explains how to run both the CLI and GUI
 - [ ] Contribution breakdown is written in the README
 - [ ] Zipped and named correctly: `group<number>-Cmp1<lab>.zip`

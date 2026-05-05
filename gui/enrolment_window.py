@@ -90,6 +90,9 @@ class EnrolmentWindow(QMainWindow):
         self.enrol_btn = QPushButton("+ Enrol in Subject")
         self.enrol_btn.setFixedHeight(46)
         self.enrol_btn.clicked.connect(self._on_enrol)
+        self.enrol_btn.setStyleSheet("""
+        background-color: "#4f46e5"
+        """)
         content_layout.addWidget(self.enrol_btn)
 
         view_btn = QPushButton("View Subject Details")
