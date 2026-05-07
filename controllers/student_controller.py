@@ -3,7 +3,7 @@ from models.student import Student
 from models.database import Database
 
 EMAIL_PATTERN = r"^[a-zA-Z]+\.[a-zA-Z]+@university\.com$"
-PASSWORD_PATTERN = r"^[A-Z][a-zA-Z]{4,}\d{3,}$"
+PASSWORD_PATTERN = r"^[A-Z][a-zA-Z]{5,}\d{3,}$"
 
 class StudentController:
 
