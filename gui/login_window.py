@@ -84,7 +84,6 @@ class LoginWindow(QMainWindow):
 
     def _on_login(self):
         from gui.exception_window import ExceptionWindow
-        from controllers.student_controller import StudentController
         from models.database import Database
         from gui.enrolment_window import EnrolmentWindow
 
@@ -96,24 +95,34 @@ class LoginWindow(QMainWindow):
             ExceptionWindow("Email and password fields cannot be empty.", self).exec()
             return
 
-        # check email and password format
-        sc = StudentController()
-        if sc.validate_credentials(email, password) == False:
-            ExceptionWindow("Incorrect email or password format.", self).exec()
+        # check email and password format separately for specific feedback
+        import re
+        from controllers.student_controller import EMAIL_PATTERN, PASSWORD_PATTERN
+        if not re.match(EMAIL_PATTERN, email):
+            ExceptionWindow("Incorrect email format.", self).exec()
+            return
+        if not re.match(PASSWORD_PATTERN, password):
+            ExceptionWindow("Incorrect password format.", self).exec()
             return
 
         # search for student in database
         db = Database()
         all_students = db.read_all()
         logged_in_student = None
+        email_match = None
 
         for student in all_students:
+            if student.email == email:
+                email_match = student
             if student.email == email and student.password == password:
                 logged_in_student = student
 
         # check if student was found
-        if logged_in_student == None:
-            ExceptionWindow("Student does not exist.", self).exec()
+        if logged_in_student is None:
+            if email_match is None:
+                ExceptionWindow("No account found with that email address.", self).exec()
+            else:
+                ExceptionWindow("Incorrect password. Please try again.", self).exec()
             return
 
         # open enrolment window

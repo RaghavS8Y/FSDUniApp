@@ -2,8 +2,9 @@ from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QFrame,
     QLabel, QPushButton, QListWidget, QListWidgetItem
 )
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QFont
+from models.database import Database
 
 
 class EnrolmentWindow(QMainWindow):
@@ -123,10 +124,43 @@ class EnrolmentWindow(QMainWindow):
             item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsSelectable)
             self.subject_list.addItem(item)
         else:
-            for s in self.student.subjects:
-                self.subject_list.addItem(
-                    f"  Subject {s.subject_id}    ·    Mark: {s.mark}    ·    Grade: {s.grade}"
-                )
+            for i, s in enumerate(self.student.subjects):
+                item = QListWidgetItem()
+                item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsSelectable)
+                self.subject_list.addItem(item)
+
+                row_widget = QWidget()
+                row_widget.setStyleSheet("background: transparent;")
+                row_layout = QHBoxLayout(row_widget)
+                row_layout.setContentsMargins(10, 4, 10, 4)
+                row_layout.setSpacing(8)
+
+                text = QLabel(f"Subject {s.subject_id}    ·    Mark: {s.mark}    ·    Grade: {s.grade}")
+                text.setStyleSheet("color: #1e293b; background: transparent;")
+                row_layout.addWidget(text, 1)
+
+                remove_btn = QPushButton("Remove")
+                remove_btn.setFixedSize(72, 28)
+                remove_btn.setStyleSheet("""
+                    QPushButton {
+                        background-color: #fee2e2;
+                        color: #dc2626;
+                        border: none;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        font-weight: bold;
+                        min-height: 0px;
+                        padding: 0px;
+                    }
+                    QPushButton:hover { background-color: #fecaca; }
+                    QPushButton:pressed { background-color: #fca5a5; }
+                """)
+                remove_btn.clicked.connect(lambda _, idx=i: self._on_remove(idx))
+                row_layout.addWidget(remove_btn)
+
+                item.setSizeHint(QSize(0, 46))
+                self.subject_list.setItemWidget(item, row_widget)
+
         self.count_label.setText(
             f"Enrolled in {len(self.student.subjects)} of 4 subjects"
         )
@@ -134,7 +168,6 @@ class EnrolmentWindow(QMainWindow):
     def _on_enrol(self):
         from gui.exception_window import ExceptionWindow
         from models.subject import Subject
-        from models.database import Database
 
         # check enrolment limit
         if len(self.student.subjects) >= 4:
@@ -153,6 +186,18 @@ class EnrolmentWindow(QMainWindow):
             if all_students[i].student_id == self.student.student_id:
                 all_students[i] = self.student
 
+        db.write_all(all_students)
+
+        self._refresh_list()
+
+    def _on_remove(self, index):
+        self.student.subjects.pop(index)
+
+        db = Database()
+        all_students = db.read_all()
+        for i in range(len(all_students)):
+            if all_students[i].student_id == self.student.student_id:
+                all_students[i] = self.student
         db.write_all(all_students)
 
         self._refresh_list()

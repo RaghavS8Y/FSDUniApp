@@ -57,24 +57,24 @@
     "student_id": "298279",
     "subjects": [
       {
-        "subject_id": "187",
-        "mark": 55,
+        "subject_id": "563",
+        "mark": 98,
+        "grade": "HD"
+      },
+      {
+        "subject_id": "046",
+        "mark": 30,
+        "grade": "Z"
+      },
+      {
+        "subject_id": "123",
+        "mark": 64,
         "grade": "P"
       },
       {
-        "subject_id": "399",
-        "mark": 82,
-        "grade": "D"
-      },
-      {
-        "subject_id": "983",
-        "mark": 37,
-        "grade": "Z"
-      },
-      {
-        "subject_id": "059",
-        "mark": 32,
-        "grade": "Z"
+        "subject_id": "032",
+        "mark": 98,
+        "grade": "HD"
       }
     ]
   },
