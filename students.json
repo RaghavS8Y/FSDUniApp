@@ -2,7 +2,7 @@
   {
     "name": "John Smith",
     "email": "john.smith@university.com",
-    "password": "Helloworld123",
+    "password": "Hello123",
     "student_id": "673358",
     "subjects": [
       {
@@ -25,7 +25,7 @@
   {
     "name": "Jane Doe",
     "email": "jane.doe@university.com",
-    "password": "Helloworld456",
+    "password": "World456",
     "student_id": "762740",
     "subjects": [
       {

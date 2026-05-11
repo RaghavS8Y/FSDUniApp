@@ -14,7 +14,6 @@
 | **Christina** | C | Subject Enrolment System |
 | **Lex** | D | Admin System |
 | **Raghav** | E + Integration | GUIUniApp + merging everything |
-
 ---
 
 ## Folder Structure
