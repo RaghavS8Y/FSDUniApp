@@ -83,49 +83,37 @@ class LoginWindow(QMainWindow):
         outer.addWidget(form_widget, 1)
 
     def _on_login(self):
+        import re
         from gui.exception_window import ExceptionWindow
-        from models.database import Database
         from gui.enrolment_window import EnrolmentWindow
+        from controllers.student_controller import StudentController, EMAIL_PATTERN
 
         email = self.email_input.text().strip()
         password = self.password_input.text().strip()
 
-        # check fields are not empty
         if email == "" or password == "":
             ExceptionWindow("Email and password fields cannot be empty.", self).exec()
             return
 
-        # check email and password format separately for specific feedback
-        import re
-        from controllers.student_controller import EMAIL_PATTERN, PASSWORD_PATTERN
         if not re.match(EMAIL_PATTERN, email):
-            ExceptionWindow("Incorrect email format.", self).exec()
-            return
-        if not re.match(PASSWORD_PATTERN, password):
-            ExceptionWindow("Incorrect password format.", self).exec()
-            return
-
-        # search for student in database
-        db = Database()
-        all_students = db.read_all()
-        logged_in_student = None
-        email_match = None
-
-        for student in all_students:
-            if student.email == email:
-                email_match = student
-            if student.email == email and student.password == password:
-                logged_in_student = student
-
-        # check if student was found
-        if logged_in_student is None:
-            if email_match is None:
-                ExceptionWindow("No account found with that email address.", self).exec()
-            else:
-                ExceptionWindow("Incorrect password. Please try again.", self).exec()
+            ExceptionWindow(
+                "Please log in with your university-provided email address. "
+                "It should be in the format firstname.lastname@university.com.",
+                self
+            ).exec()
             return
 
-        # open enrolment window
-        self.enrolment_window = EnrolmentWindow(logged_in_student)
+        sc = StudentController()
+        student = sc.find_student_by_email(email)
+
+        if student is None:
+            ExceptionWindow("No account found with that email address.", self).exec()
+            return
+
+        if student.password != password:
+            ExceptionWindow("Incorrect password. Please try again.", self).exec()
+            return
+
+        self.enrolment_window = EnrolmentWindow(student)
         self.enrolment_window.show()
         self.close()

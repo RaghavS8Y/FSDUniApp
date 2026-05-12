@@ -68,7 +68,7 @@ class SubjectWindow(QMainWindow):
         content_layout.addWidget(self.table)
 
         if self.subjects:
-            avg = sum(s.mark for s in self.subjects) / len(self.subjects)
+            avg = sum(s.mark for s in self.subjects) / 4
             avg_label = QLabel(f"Average mark: {avg:.1f}")
             avg_label.setAlignment(Qt.AlignmentFlag.AlignRight)
             avg_label.setStyleSheet("color: #64748b; font-size: 12px; background: transparent;")

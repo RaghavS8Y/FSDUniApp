@@ -15,6 +15,12 @@ class StudentController:
         password_ok = bool(re.match(PASSWORD_PATTERN, password))
 
         return email_ok and password_ok
+
+    def find_student_by_email(self, email):
+        for student in self.db.read_all():
+            if student.email == email:
+                return student
+        return None
     
     def extract_name_from_email(self, email):
         name_part = email.split("@")[0]
@@ -103,13 +109,12 @@ class StudentController:
 
             print("        email and password formats acceptable")
 
-            students = self.db.read_all()
-            for s in students:
-                if s.email == email and s.password == password:
-                    return s
-                
+            student = self.find_student_by_email(email)
+            if student and student.password == password:
+                return student
+
             print("        Student does not exist")
-            return 
+            return None
 
 
 

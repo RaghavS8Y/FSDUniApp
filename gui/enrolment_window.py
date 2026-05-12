@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QFont
-from models.database import Database
+from controllers.subject_controller import SubjectController
 
 
 class EnrolmentWindow(QMainWindow):
@@ -167,39 +167,20 @@ class EnrolmentWindow(QMainWindow):
 
     def _on_enrol(self):
         from gui.exception_window import ExceptionWindow
-        from models.subject import Subject
 
-        # check enrolment limit
-        if len(self.student.subjects) >= 4:
+        sc = SubjectController(self.student)
+        result = sc.enrol_subject()
+
+        if result is None:
             ExceptionWindow("Students are allowed to enrol in 4 subjects only.", self).exec()
             return
-
-        # create new subject and add to student
-        new_subject = Subject()
-        self.student.subjects.append(new_subject)
-
-        # save updated student back to database
-        db = Database()
-        all_students = db.read_all()
-
-        for i in range(len(all_students)):
-            if all_students[i].student_id == self.student.student_id:
-                all_students[i] = self.student
-
-        db.write_all(all_students)
 
         self._refresh_list()
 
     def _on_remove(self, index):
-        self.student.subjects.pop(index)
-
-        db = Database()
-        all_students = db.read_all()
-        for i in range(len(all_students)):
-            if all_students[i].student_id == self.student.student_id:
-                all_students[i] = self.student
-        db.write_all(all_students)
-
+        subject_id = self.student.subjects[index].subject_id
+        sc = SubjectController(self.student)
+        sc.remove_subject_by_id(subject_id)
         self._refresh_list()
 
     def _on_view(self):
